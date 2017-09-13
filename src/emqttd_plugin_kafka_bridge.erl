@@ -26,11 +26,11 @@
 %%%-----------------------------------------------------------------------------
 -module(emqttd_plugin_kafka_bridge).
 
--include("emqttd.hrl").
+-include_lib("emqttd/include/emqttd.hrl").
 
--include("emqttd_protocol.hrl").
+-include_lib("emqttd/include/emqttd_protocol.hrl").
 
--include("emqttd_internal.hrl").
+-include_lib("emqttd/include/emqttd_internal.hrl").
 
 -export([load/1, unload/0]).
 
