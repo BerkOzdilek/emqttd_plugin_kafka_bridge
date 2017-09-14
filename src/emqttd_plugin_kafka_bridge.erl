@@ -63,7 +63,7 @@ on_client_connected(ConnAck, Client = #mqtt_client{client_id  = ClientId}, _Env)
         {type, <<"connected">>},
         {client_id, ClientId},
         {cluster_node, node()},
-        {ts, emqttd_time:now_to_secs()}
+        {ts, emqttd_time:now_secs()}
     ]),
     
     ekaf:produce_async_batched(<<"broker_message">>, list_to_binary(Json)),
@@ -84,7 +84,7 @@ on_client_disconnected(Reason, ClientId, _Env) ->
         {client_id, ClientId},
         {reason, Reason},
         {cluster_node, node()},
-        {ts, emqttd_time:now_to_secs()}
+        {ts, emqttd_time:now_secs()}
     ]),
 
     ekaf:produce_async_batched(<<"broker_message">>, list_to_binary(Json)),
@@ -115,7 +115,7 @@ on_client_subscribe_after(ClientId, TopicTable, _Env) ->
                 {client_id, ClientId},
                 {topic, lists:last(Key)},
                 {cluster_node, node()},
-                {ts, emqttd_time:now_to_secs()}
+                {ts, emqttd_time:now_secs()}
             ]),
             ekaf:produce_async_batched(<<"broker_message">>, list_to_binary(Json));
         _ -> 
@@ -140,7 +140,7 @@ on_client_unsubscribe(ClientId, Topics, _Env) ->
         {client_id, ClientId},
         {topic, lists:last(Topics)},
         {cluster_node, node()},
-        {ts, emqttd_time:now_to_secs()}
+        {ts, emqttd_time:now_secs()}
     ]),
     
     ekaf:produce_async_batched(<<"broker_message">>, list_to_binary(Json)),
@@ -174,7 +174,7 @@ on_message_publish(Message, _Env) ->
         {payload, Payload},
         {qos, QoS},
         {cluster_node, node()},
-        {ts, emqttd_time:now_to_secs(Timestamp)}
+        {ts, emqttd_time:now_secs(Timestamp)}
     ]),
 
     ekaf:produce_async_batched(<<"broker_message">>, list_to_binary(Json)),
@@ -200,7 +200,7 @@ on_message_delivered(ClientId, Message, _Env) ->
         {payload, Payload},
         {qos, QoS},
         {cluster_node, node()},
-        {ts, emqttd_time:now_to_secs(Timestamp)}
+        {ts, emqttd_time:now_secs(Timestamp)}
     ]),
 
     ekaf:produce_async_batched(<<"broker_message">>, list_to_binary(Json)),
@@ -227,7 +227,7 @@ on_message_acked(ClientId, Message, _Env) ->
         {payload, Payload},
         {qos, QoS},
         {cluster_node, node()},
-        {ts, emqttd_time:now_to_secs(Timestamp)}
+        {ts, emqttd_time:now_secs(Timestamp)}
     ]),
 
     ekaf:produce_async_batched(<<"broker_message">>, list_to_binary(Json)),
