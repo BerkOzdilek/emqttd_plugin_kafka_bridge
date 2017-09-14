@@ -41,7 +41,6 @@
 
 -export([on_message_publish/2, on_message_delivered/3, on_message_acked/3]).
 
--record(struct, {lst=[]}).
 
 %% Called when the plugin application start
 load(Env) ->
@@ -250,9 +249,9 @@ ekaf_init(_Env) ->
     %% Set topic
     application:set_env(ekaf, ekaf_bootstrap_topics, <<"broker_message">>),
 
-    {ok, _} = application:ensure_all_started(kafkamocker),
-    {ok, _} = application:ensure_all_started(gproc),
-    {ok, _} = application:ensure_all_started(ranch),
+    % {ok, _} = application:ensure_all_started(kafkamocker),
+    % {ok, _} = application:ensure_all_started(gproc),
+    % {ok, _} = application:ensure_all_started(ranch),
     {ok, _} = application:ensure_all_started(ekaf),
 
     io:format("Init ekaf with ~p~n", [BootstrapBroker]).
